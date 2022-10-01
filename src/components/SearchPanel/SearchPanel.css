@@ -1,0 +1,10 @@
+.search-panel{
+    width: 80%;
+}
+.search-panel input{
+    outline: none;
+    width: 100%;
+    padding: 6px 15px;
+    border-radius: 3px;
+    border: 1px solid #999;
+}

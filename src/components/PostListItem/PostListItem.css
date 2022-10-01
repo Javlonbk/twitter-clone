@@ -1,0 +1,27 @@
+.post-item{
+    padding: 15px 25px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    border-radius: 3px;
+    border: 1px solid #999;
+}
+.actions button{
+  margin-right: 7px;
+}
+.actions button i{
+    font-size: 16px;
+}
+.fa-star{
+    color: #fff;
+}
+.fa-trash{
+    color: red;
+}
+p{
+    width: 70%;
+    font-size: 16px;
+    font-weight: 700;
+}
+.important{
+   color: yellow;
+}

@@ -1,0 +1,10 @@
+.post-add{
+    width: 100%;
+}
+.post-add input{
+    outline: none;
+    width: 80%;
+    padding: 6px 15px;
+    border-radius: 3px;
+    border: 1px solid #999;
+}
