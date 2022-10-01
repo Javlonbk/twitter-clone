@@ -7,15 +7,17 @@
 }
 .actions button{
   margin-right: 7px;
+  border: none;
+  background-color: #fff;
 }
 .actions button i{
     font-size: 16px;
 }
-.fa-star{
-    color: #fff;
+i{
+    color: rgb(219, 216, 216);
 }
 .fa-trash{
-    color: red;
+    color: rgb(121, 13, 13);
 }
 p{
     width: 70%;
@@ -23,5 +25,12 @@ p{
     font-weight: 700;
 }
 .important{
-   color: yellow;
+   color: yellow !important;
+}
+.fa-heart{
+    display: none;
+    color: red;
+}
+.fa-heart-show{
+    display: block;
 }
