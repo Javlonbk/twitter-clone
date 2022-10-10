@@ -6,3 +6,8 @@
     background-color: #fff;
 
 }
+@media screen and(max-width:991.92px){
+    .app{
+        width: 100%;
+    }
+}

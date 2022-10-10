@@ -12,7 +12,6 @@ export default class PostAddForm extends React.Component{
 
   getVal = (e) => {
      this.state.inVal = e
-     console.log(this.state.inVal)
   }
 
   render(){

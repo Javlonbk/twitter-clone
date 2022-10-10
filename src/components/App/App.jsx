@@ -12,10 +12,12 @@ export default class App extends React.Component{
     super(props);
     this.state = {
       data:[
-        {label:'To be master from React', important: true, id:1},
-        {label:'Write code on computer', important: false, id:2}, 
-        {label:'do somethings', important: false, id:3 }
+        {label:'To be master from React', important: false, liked: false, id:1},
+        {label:'Write code on computer', important: false, liked: false, id:2}, 
+        {label:'do somethings', important: false, liked: false, id:3 }
       ],
+      term: '',
+      filter: 'all'
     }
   }
 
@@ -31,19 +33,89 @@ export default class App extends React.Component{
       id: this.state.data.length + 1
     }
     this.setState({data: [...this.state.data, newPost]})
-    console.log(this.state.data)
+  }
+  onToggleImportant = (id) => {
+    this.setState(({data}) => {
+      const index = data.findIndex(item => {
+        return item.id === id
+      })
+      const oldItem = data[index]
+      const newItem = {...oldItem, important: !oldItem.important }
+      const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)]
+      return {
+        data: newArr
+      }
+    })
+  }
+  onToggleLiked = (id) => {
+    
+    this.setState(({data}) => {
+      const index = data.findIndex(item => {
+        return item.id === id
+      })
+      const oldItem = data[index]
+      const newItem = {...oldItem, liked: !oldItem.liked }
+      const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)]
+      return {
+        data: newArr
+      }
+    })
   }
 
+  searchPost = (items, term) => {
+      if(term.length == 0){
+        return items
+      }
+      return  items.filter(item => {
+        return item.label.toLowerCase().includes(term.toLowerCase())
+      })
+  }
+
+  onUpdateSearch = (term) => {
+    this.setState({term})
+  }
+  
+  filterPost (items, filter){
+    if(filter === 'liked'){
+      return items.filter(item => item.liked)
+    }
+    else{
+      return items
+    }
+  }
+  onFilterSelect = (name) => {
+    this.setState({filter: name}) 
+  }
+  
+  
+
   render(){
-  const  {data} = this.state
-    return (
+  const  {data, term, filter} = this.state
+  const liked = data.filter((item) => item.liked).length
+  const allPosts = data.length
+  
+  const visiblePosts = this.filterPost((this.searchPost(data, term)), filter)
+  const aap = this.filterPost(data, filter)
+  
+  return (
       <div className='app container mt-5 mx-auto'>
-        <AppHeader/>
+        <AppHeader liked={liked} allPosts={allPosts} />
         <div className='d-flex justify-content-between my-3'>
-           <SearchPanel/>
-           <PostStatusFilter/>
+           <SearchPanel
+            onUpdateSearch={this.onUpdateSearch}
+           />
+           <PostStatusFilter
+            filter={filter}
+            onFilterSelect={this.onFilterSelect}
+           />
         </div>
-        <PostList posts={data} onDelete={(id) => this.onDelete(id)} />
+        <PostList 
+        posts={visiblePosts}
+         onDelete={(id) => this.onDelete(id)} 
+         onToggleImportant={this.onToggleImportant}
+         onToggleLiked={this.onToggleLiked}
+
+         />
         <PostAddForm onAdd={(post) => this.onAdd(post)} />
       </div>
     )
